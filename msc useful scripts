@@ -1,0 +1,35 @@
+function clearCells()
+{
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var maxRows = sheet.getMaxRows(); 
+  var lastRow = sheet.getLastRow();
+  var LastCol = sheet.getLastColumn();
+ // sh.deleteRows(lastRow+1, maxRows-lastRow);
+  var ClearCells = sheet.getRange(lastRow+1, maxRows-lastRow); 
+  ClearCells.setValue('');
+}
+
+function totalHours()
+{  
+    var sheet = SpreadsheetApp.getActiveSheet();
+  //var stringTotalHours = "=sum(H1:H)"
+  var LastRow = sheet.getLastRow();
+  
+  var totalHours = sheet.getRange(LastRow+2,9,1,1)
+    totalHours.setValue("=sum(H11:H)");
+  
+   var totalPay = sheet.getRange(LastRow+3,9,1,1)
+     totalPay.setValue("=sum(J11:J)");
+  
+   var StrtotalPay = sheet.getRange(LastRow+2,8,1,1)
+   StrtotalPay.setValue("Total Hours: ");
+   var StrtotalHours = sheet.getRange(LastRow+3,8,1,1)
+   StrtotalHours.setValue("Total Pay: ");
+
+ }
+
+function newMonth()
+{
+  var name = (new Date()).toLocaleDateString();
+  SpreadsheetApp.getActiveSpreadsheet().insertSheet(name);
+}
