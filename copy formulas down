@@ -1,0 +1,12 @@
+//copies formulas (or any desired content) w/in "range" to desired range in spreadsheet.
+//Can set trigger to execute on submission of form = best for updating new entries with calculated data.
+
+function CopyFormulasDown()
+{
+  var sheet = SpreadsheetApp.getActiveSheet(), 
+      LastRow = sheet.getLastRow(); 
+  var LastCol = sheet.getLastColumn(), 
+      range = sheet.getRange(2,11,1,LastCol);
+  range.copyTo(sheet.getRange(2,11,LastRow-1,LastCol), {contentsOnly:false});
+  
+}
