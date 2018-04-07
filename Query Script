@@ -1,0 +1,39 @@
+//Imports data based on user input -- Pulls from user specificed monthly spreadsheet, worker, and pay period.
+//Executes script on button press (Drawing embedded in spreadsheet)
+
+function Query()
+{
+  var QueryBegining = "=query( "
+  var QRange ="!A:Q,";
+  var QSelect = '"Select D, E, F, G, H, K, I WHERE B CONTAINS '
+  var Qand = "AND D = ";
+  var Qend = '")';
+  
+  var sheet = SpreadsheetApp.openById('1WfoI8x-hcYig2CWdS_NowpCnqYA7PHXbkjX2SqGFHJ4').getSheetByName('TestPayStub');
+ // var originRange = sheet.getRange("I6");
+  //var target = sheet.getRange("L22");
+  //originRange.copyTo(target);
+  var QMonth = Browser.inputBox("Month ");
+  var CGname = Browser.inputBox("Care giver name ");
+  var Qperiod = Browser.inputBox("Pay Period ");
+  var apostrophe = "'";
+  
+   var LastRow = sheet.getLastRow();
+  
+  //Clear paystub values
+  var ClearCells = sheet.getRange(11,2,LastRow+20,7); 
+  ClearCells.setValue('');
+
+  var cell = sheet.getRange("C10");
+  cell.setValue(QueryBegining + QMonth + QRange + QSelect +apostrophe + CGname +apostrophe + Qand + apostrophe + Qperiod + apostrophe + Qend);
+  //=query( March!A:Q, "Select D, E, F, G, H, K, I WHERE B CONTAINS 'Amarah' AND D = '1st through 15th'")
+  
+  var setName = sheet.getRange("B11");
+  setName.setValue(CGname);
+  
+  
+  //Copy formulas to end of data 
+      Payrange = sheet.getRange(11,10,1,1);
+  Payrange.copyTo(sheet.getRange(11,10,LastRow-10,1), {contentsOnly:false});
+  
+}
