@@ -1,0 +1,7 @@
+function removeEmptyRows()
+{
+  var sh = SpreadsheetApp.getActiveSheet();
+  var maxRows = sh.getMaxRows(); 
+  var lastRow = sh.getLastRow();
+  sh.deleteRows(lastRow+1, maxRows-lastRow);
+}
